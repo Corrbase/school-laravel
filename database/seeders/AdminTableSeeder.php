@@ -15,7 +15,7 @@ class AdminTableSeeder extends Seeder
             admin::create([
                 'name' => 'admin',
                 'email' => 'admin@admin.com',
-                'password' => '123456789',
+                'password' => 'wSqYDrUB5rrVnsqktssNkehdvZVg8RWtlhN9o8PDkJlUe3fRMwlDW',
             ]);
 
     }

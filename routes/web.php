@@ -17,10 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/home', function (){return view('home');});
+Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'admin'])->middleware('guest');
 
 
 // requests
 
 Route::post('/r/login', [\App\Http\Controllers\AdminController::class, 'login_r']);
+Route::post('/r/register', [\App\Http\Controllers\AdminController::class, 'register_r']);
