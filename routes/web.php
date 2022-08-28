@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('admin');
 
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'admin'])->middleware('guest');
+Route::get('/admin/teachers', [\App\Http\Controllers\AdminController::class, 'teachers'])->middleware('guest');
 
 
 // requests
