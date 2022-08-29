@@ -41,6 +41,18 @@ class AdminController extends Controller
         ]);
     }
 
+    public function teacher_edit(Teacher $teacher)
+    {
+        return view('admin/edit/teacher', [
+            'teacher' => $teacher,
+        ]);
+    }
+
+    public function teacher_students(Teacher $teacher)
+    {
+        return view('', []);
+    }
+
 
     //requests
 
@@ -60,25 +72,17 @@ class AdminController extends Controller
         return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
     }
 
-
-
-    // hidden function
-    public function register_r(Request $request){
-        $formFields = $request->validate([
-            'name' => ['required', 'min:3'],
-            'email' => ['required', 'email', Rule::unique('users', 'email')],
-            'password' => 'required|confirmed|min:6'
+    public function teacher_edit_r(Request $request, Teacher $teacher)
+    {
+        $data = $request->validate([
+            'name' => ['required', 'min:3', 'max:50'],
+            'sname' => ['required', 'min:3', 'max:50'],
+            'email' => ['email'],
+            'age' => ['numeric'],
+            'gender' => ['required']
         ]);
+        $teacher->update($data);
 
-        // Hash Password
-        $formFields['password'] = bcrypt($formFields['password']);
-
-        // Create User
-        $user = admin::create($formFields);
-
-        // Login
-        auth('admin')->login($user);
-
-        return redirect('/')->with('message', 'User created and logged in');
+        return back()->with('message', 'Listing deleted successfully');
     }
 }

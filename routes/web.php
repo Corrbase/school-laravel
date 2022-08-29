@@ -19,13 +19,17 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'admin'])->middleware('auth');
-Route::get('/admin/teachers', [\App\Http\Controllers\AdminController::class, 'teachers'])->middleware('auth');
 Route::get('/admin/students', [\App\Http\Controllers\AdminController::class, 'students'])->middleware('auth');
 
+Route::get('/admin/teachers', [\App\Http\Controllers\AdminController::class, 'teachers'])->middleware('auth');
+
+Route::get('/admin/teacher/students/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher_students'])->middleware('auth');
+Route::get('/admin/teacher/edit/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher_edit'])->middleware('auth');
 Route::get('/admin/teacher/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher'])->middleware('auth');
+
+Route::put('/admin/r/edit/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher_edit_r']);
 
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -12,7 +12,7 @@ class TeacherTableSeeder extends Seeder
     {
         $faker_en = FakerFactory::create('en_US');
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             teacher::create([
                 'name' => $faker_en->firstName,
                 'sname' => $faker_en->lastName,

@@ -25,6 +25,7 @@
                     <th scope="col">email</th>
                     <th scope="col">gender</th>
                     <th scope="col">age</th>
+                    <th scope="col">profile</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,11 @@
                         <td>{{$item->email}}</td>
                         <td>{{$item->gender}}</td>
                         <td>{{$item->age}}</td>
+                        <td>
+                            <a href="/admin/teacher/{{$item->id}}" class="link-danger">
+                                <i class="fa-solid fa-user"></i><span class="p-2">Profile</span>
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
 
