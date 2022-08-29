@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,13 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware('admin');
+});
 
-Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'admin'])->middleware('guest');
-Route::get('/admin/teachers', [\App\Http\Controllers\AdminController::class, 'teachers'])->middleware('guest');
+Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'admin'])->middleware('auth');
+Route::get('/admin/teachers', [\App\Http\Controllers\AdminController::class, 'teachers'])->middleware('auth');
+Route::get('/admin/students', [\App\Http\Controllers\AdminController::class, 'students'])->middleware('auth');
+
+Route::get('/admin/teacher/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher'])->middleware('auth');
 
 
-// requests
 
-Route::post('/r/login', [\App\Http\Controllers\AdminController::class, 'login_r']);
-Route::post('/r/register', [\App\Http\Controllers\AdminController::class, 'register_r']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

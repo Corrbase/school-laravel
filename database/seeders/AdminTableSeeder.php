@@ -12,11 +12,6 @@ class AdminTableSeeder extends Seeder
     {
         $faker_en = FakerFactory::create('en_US');
 
-            admin::create([
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => 'wSqYDrUB5rrVnsqktssNkehdvZVg8RWtlhN9o8PDkJlUe3fRMwlDW',
-            ]);
 
     }
 }

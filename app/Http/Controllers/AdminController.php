@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\admin;
+use App\Models\Student;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,14 +21,25 @@ class AdminController extends Controller
     public function teachers()
     {
 
-        return view('admin/teacher', [
+        return view('admin/chapter/teachers', [
 
-                'teacher' => Teacher::latest()->simplePaginate(10),
+                'teacher' => Teacher::latest()->simplePaginate(10, ['*'], 'teacher' ),
 
         ]);
     }
 
+    public function students()
+    {
+        return view('admin/chapter/students', [
+                'student' => Student::latest()->simplePaginate(10, ['*'], 'student' ),
+        ]);
+    }
 
+    public function teacher(Teacher $teacher){
+        return view('admin/chapter/teacher', [
+            'teacher' => $teacher,
+        ]);
+    }
 
 
     //requests

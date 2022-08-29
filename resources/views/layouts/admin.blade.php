@@ -37,6 +37,11 @@
                                     <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Teachers</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="/admin/students" class="nav-link px-0 align-middle">
+                                    <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Students</span>
+                                </a>
+                            </li>
                             {{--                            <li>--}}
                             {{--                                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">--}}
                             {{--                                    <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Teachers</span> </a>--}}
@@ -57,7 +62,7 @@
                         <div class="dropdown pb-4">
                             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                <span class="d-none d-sm-inline mx-1">{{ auth('admin')->user()->name }}</span>
+                                <span class="d-none d-sm-inline mx-1">{{ auth()->user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                                 <li><a class="dropdown-item" href="#">New project...</a></li>
