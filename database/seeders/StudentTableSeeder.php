@@ -18,7 +18,7 @@ class StudentTableSeeder extends Seeder
                 'sname' => $faker_en->lastName,
                 'gender' => 'female' or 'male',
                 'teacher_id' => $faker_en->numberBetween(1, 20),
-                'age' => $faker_en->numberBetween(18, 65),
+                'age' => $faker_en->numberBetween(6, 18),
                 'email' => $faker_en->email,
                 'class_age' => $faker_en->numberBetween(1, 12),
                 'password' => $faker_en->password,

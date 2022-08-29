@@ -36,7 +36,7 @@ class AdminController extends Controller
     }
 
     public function teacher(Teacher $teacher){
-        return view('admin/chapter/teacher', [
+        return view('admin/hidden/teacher', [
             'teacher' => $teacher,
         ]);
     }
@@ -50,7 +50,10 @@ class AdminController extends Controller
 
     public function teacher_students(Teacher $teacher)
     {
-        return view('', []);
+
+        return view('admin/hidden/students', [
+            'teacher' => $teacher
+        ]);
     }
 
 

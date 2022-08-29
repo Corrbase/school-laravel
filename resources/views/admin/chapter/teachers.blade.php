@@ -26,6 +26,7 @@
                     <th scope="col">gender</th>
                     <th scope="col">age</th>
                     <th scope="col">profile</th>
+                    <th scope="col">students</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,6 +41,11 @@
                         <td>
                             <a href="/admin/teacher/{{$item->id}}" class="link-danger">
                                 <i class="fa-solid fa-user"></i><span class="p-2">Profile</span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/admin/teacher/students/{{$item->id}}" class="link-danger">
+                                <i class="fa-solid fa-user"></i><span class="p-2">Students</span>
                             </a>
                         </td>
                     </tr>
