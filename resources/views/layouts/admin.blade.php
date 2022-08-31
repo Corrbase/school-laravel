@@ -21,6 +21,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('style')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 </head>
@@ -91,11 +92,15 @@
     </section>
 
 
+
     <script>
         function paginate(pd_data){
             $.ajax({
                 url: "{{ route('testr') }}",
                 type:"POST",
+                beforeSend: function() {
+                    $('#loader').removeClass('d-none')
+                },
                 data:{
                     ...pd_data,
                     _token: "{{ csrf_token() }}"
@@ -106,7 +111,10 @@
                 },
                 error: function(error) {
                     console.log(error);
-                }
+                },
+                complete: function(){
+                    $('#loader').addClass('d-none')
+                },
             });
         }
     </script>

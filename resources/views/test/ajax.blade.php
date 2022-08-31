@@ -1,39 +1,66 @@
 @extends('layouts.admin')
 
+@section('style')
+    <style>
+        .lds-dual-ring {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+        }
+        .lds-dual-ring:after {
+            content: " ";
+            display: block;
+            width: 64px;
+            height: 64px;
+            margin: 5% auto;
+            border-radius: 50%;
+            border: 6px solid #fff;
+            border-color: #fff transparent #fff transparent;
+            animation: lds-dual-ring 1.2s linear infinite;
+        }
+        @keyframes lds-dual-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,.8);
+            z-index: 999;
+            opacity: 1;
+            transition: all 0.5s;
+        }
+    </style>
+
+@endsection
+
+
 @section('content')
 
-    <form action="/testr" id="register_form">
-        <input class='formVal' type="text" name="first_name" placeholder="First Name">
-        <input class='formVal' type="text" name="last_name" placeholder="LastName">
-        <input type="submit" value="submit_now" onclick="call(); return false;">
-    </form>
-
-    <input type="text" id="search" onkeyup="search()"  placeholder="search">
-    <div class="mt-6 pb-3 pt-3 ">
+    <div class="d-flex align-items-center">
+        <input type="text" id="search" class="input-group-text m-2"  onkeyup="search()"  placeholder="search">
         <div>
-            <div>
-                <a href="javascript:void(0)" onclick="previous()">Prevoius</a>
-                <a href="javascript:void(0)" onclick="next()">Next</a>
-            </div>
-            <div>
-                <select name="page_num" id="page_num">
-                    <option value="5" onclick="alert(111)">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                </select>
-            </div>
-
+            <select class="form-select" name="page_num" id="page_num">
+                <option value="5" onclick="alert(111)">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+            </select>
         </div>
-        <div>
-            <a href=""></a>
-        </div>
-
-    </div>
-    <div id="table_data">
-        @include('test.pagination')
     </div>
 
-    <div id="lala"></div>
+    <div id="table_data"></div>
+
+    <div id="loader" class="lds-dual-ring d-none overlay">hello</div>
+
 
 @endsection
 
@@ -45,6 +72,10 @@
             search: $('#search').val(),
             page_num: 5
         };
+
+        paginate(pd_data)
+
+
         $('#page_num').on('change', function() {
             pd_data.page_num = $(this).val();
             pd_data.page = 1;
@@ -58,7 +89,12 @@
         function search(){
             pd_data.search = $('#search').val()
             pd_data.page = 1;
-            paginate(pd_data)
+            var searchTimeout;
+            window.clearTimeout(searchTimeout);
+            searchTimeout = window.setTimeout(function(){
+                paginate(pd_data);
+            }, 500);
+
         }
         function previous(){
             pd_data.page -= 1
@@ -88,29 +124,6 @@
                 }
             });
         }
-
-        {{--function myFunction()--}}
-        {{--{--}}
-
-
-        {{--    var elements = document.getElementsByClassName("formVal");--}}
-        {{--    var formData = new FormData();--}}
-        {{--    for(var i=0; i<elements.length; i++)--}}
-        {{--    {--}}
-        {{--        formData.append(elements[i].name, elements[i].value);--}}
-        {{--    }--}}
-        {{--    formData.append('_token', "{{ csrf_token() }}");--}}
-        {{--    var xmlHttp = new XMLHttpRequest();--}}
-        {{--    xmlHttp.onreadystatechange = function()--}}
-        {{--    {--}}
-        {{--        if(xmlHttp.readyState == 4 && xmlHttp.status == 200)--}}
-        {{--        {--}}
-        {{--                alert(xmlHttp.responseText);--}}
-        {{--        }--}}
-        {{--    }--}}
-        {{--    xmlHttp.open("post", "/testr");--}}
-        {{--    xmlHttp.send(formData);--}}
-        {{--}--}}
     </script>
 
 @endsection

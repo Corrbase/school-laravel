@@ -57,16 +57,13 @@ class AdminController extends Controller
         ]);
     }
 
-    public function test(Request $request)
+    public function test()
     {
-
-        $data = Teacher::latest()->paginate(5);
-        return view('test/ajax', compact('data'));
+        return view('test.ajax');
     }
 
     public function request(Request $request)
     {
-
         if($request->ajax()) {
             $search = $_POST['search'];
 
@@ -74,20 +71,18 @@ class AdminController extends Controller
             {
                 $page_num =  $_POST['page_num'];
             }
+
                 $data = Student::latest()->filter([$_POST['search']])->paginate($_POST['page_num']);
 
-                return view('test/pagination', compact('data'))->render();
+            if ($data['item'] == null){
+                $_POST['page'] = $data->lastPage();
+                $data = Student::latest()->filter([$_POST['search']])->paginate($_POST['page_num']);
+            }
+                return view('test.pagination', ['data' => $data])->render();
         }
     }
 
-    function fetch_data(Request $request)
-    {
-        if($request->ajax())
-        {
-            $data = Teacher::latest()->paginate(5);
-            return view('test/pagination', compact('data'))->render();
-        }
-    }
+
     //requests
 
     public function login_r(Request $request){
