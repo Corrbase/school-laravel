@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'admin'])->middleware('auth');
 Route::get('/admin/students', [\App\Http\Controllers\AdminController::class, 'students'])->middleware('auth');
 
@@ -30,6 +32,8 @@ Route::get('/admin/teacher/{teacher}', [\App\Http\Controllers\AdminController::c
 Route::put('/admin/r/edit/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher_edit_r']);
 
 
+// for testing
 
-Auth::routes();
+Route::get('/test', [\App\Http\Controllers\AdminController::class, 'test']);
+Route::post('/testr', [\App\Http\Controllers\AdminController::class, 'request'])->name('testr');
 

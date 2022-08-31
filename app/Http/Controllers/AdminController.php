@@ -8,6 +8,7 @@ use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use function GuzzleHttp\Promise\all;
 
 class AdminController extends Controller
 {
@@ -56,7 +57,37 @@ class AdminController extends Controller
         ]);
     }
 
+    public function test(Request $request)
+    {
 
+        $data = Teacher::latest()->paginate(5);
+        return view('test/ajax', compact('data'));
+    }
+
+    public function request(Request $request)
+    {
+
+        if($request->ajax()) {
+            $search = $_POST['search'];
+
+            if (isset($_POST['page_num']))
+            {
+                $page_num =  $_POST['page_num'];
+            }
+                $data = Student::latest()->filter([$_POST['search']])->paginate($_POST['page_num']);
+
+                return view('test/pagination', compact('data'))->render();
+        }
+    }
+
+    function fetch_data(Request $request)
+    {
+        if($request->ajax())
+        {
+            $data = Teacher::latest()->paginate(5);
+            return view('test/pagination', compact('data'))->render();
+        }
+    }
     //requests
 
     public function login_r(Request $request){
