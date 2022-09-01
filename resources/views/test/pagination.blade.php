@@ -13,6 +13,7 @@
     </div>
 
     <thead>
+
     <tr>
         <th scope="col">id</th>
         <th scope="col">FirstName</th>
@@ -65,87 +66,87 @@
                         @if($data->currentPage() == $data->lastPage())
 
                         @elseif($data->currentPage() + 1 == $data->lastPage())
-                            <a href="">{{ $data->currentPage() +1 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +1 }}" class="mm-pagination-link">{{ $data->currentPage() +1 }}</a>
 
                         @elseif($data->currentPage() + 2 == $data->lastPage())
 
-                            <a href="">{{ $data->currentPage() +1 }}</a>
-                            <a href="">{{ $data->currentPage() +2 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +1 }}" class="mm-pagination-link">{{ $data->currentPage() +1 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +2 }}" class="mm-pagination-link">{{ $data->currentPage() +2 }}</a>
                         @elseif(!(4 == $data->lastPage()))
 
-                            <a href="">{{ $data->currentPage() +1 }}</a>
-                            <a href="">{{ $data->currentPage() +2 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +1 }}" class="mm-pagination-link">{{ $data->currentPage() +1 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +2 }}" class="mm-pagination-link">{{ $data->currentPage() +2 }}</a>
                             ...
-                            <a href="">{{ $data->lastPage() }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->lastPage() }}" class="mm-pagination-link">{{ $data->lastPage() }}</a>
 
                         @else
-                            <a href="">{{ $data->currentPage() +1 }}</a>
-                            <a href="">{{ $data->currentPage() +2 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +1 }}" class="mm-pagination-link">{{ $data->currentPage() +1 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +2 }}" class="mm-pagination-link">{{ $data->currentPage() +2 }}</a>
                         @endif
                     @endif
                     @if($data->currentPage() == 2)
-                        <a href="">{{ $data->currentPage() -1 }}</a>
+                        <a href="javascript:void(0)" data-page="{{ $data->currentPage() -1 }}" class="mm-pagination-link">{{ $data->currentPage() -1 }}</a>
 
                         {{ $data->currentPage() }}
 
                         @if($data->currentPage() == $data->lastPage())
 
                         @elseif($data->currentPage() + 1 == $data->lastPage())
-                            <a href="">{{ $data->currentPage() +1 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +1 }}" class="mm-pagination-link">{{ $data->currentPage() +1 }}</a>
                         @elseif($data->currentPage() + 2 == $data->lastPage())
-                            <a href="">{{ $data->currentPage() +1 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +1 }}" class="mm-pagination-link">{{ $data->currentPage() +1 }}</a>
                         @elseif(4 == $data->lastPage())
-                            <a href="">{{ $data->currentPage() +1 }}</a>
-                            <a href="">{{ $data->currentPage() +2 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +1 }}" class="mm-pagination-link">{{ $data->currentPage() +1 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +2 }}" class="mm-pagination-link">{{ $data->currentPage() +2 }}</a>
                         @else
-                            <a href="">{{ $data->currentPage() +1 }}</a>
+                            <a href="javascript:void(0)" data-page={{ $data->currentPage() +1 }}" class="mm-pagination-link">{{ $data->currentPage() +1 }}</a>
                             ...
-                            <a href="">{{ $data->lastPage() }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->lastPage() }}" class="mm-pagination-link">{{ $data->lastPage() }}</a>
                         @endif
                     @endif
                     @if($data->currentPage() == 3)
-                        <a href="">{{ $data->currentPage() -2 }}</a>
-                        <a href="">{{ $data->currentPage() -1 }}</a>
+                        <a href="javascript:void(0)" data-page="{{ $data->currentPage() -2 }}" class="mm-pagination-link">{{ $data->currentPage() -2 }}</a>
+                        <a href="javascript:void(0)" data-page="{{ $data->currentPage() -1 }}" class="mm-pagination-link">{{ $data->currentPage() -1 }}</a>
 
                         {{ $data->currentPage() }}
 
                         @if($data->currentPage() == $data->lastPage())
 
                         @elseif($data->currentPage() + 1 == $data->lastPage())
-                            <a href="">{{ $data->currentPage() +1 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +1 }}" class="mm-pagination-link">{{ $data->currentPage() +1 }}</a>
                         @elseif($data->currentPage() + 2 == $data->lastPage())
-                            <a href="">{{ $data->currentPage() +1 }}</a>
-                            <a href="">{{ $data->currentPage() +2 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +1 }}" class="mm-pagination-link">{{ $data->currentPage() +1 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +2 }}" class="mm-pagination-link">{{ $data->currentPage() +2 }}</a>
                         @else
-                            <a href="">{{ $data->currentPage() +1 }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->currentPage() +1 }}" class="mm-pagination-link">{{ $data->currentPage() +1 }}</a>
                             ...
-                            <a href="">{{ $data->lastPage() }}</a>
+                            <a href="javascript:void(0)" data-page="{{ $data->lastPage() }}" class="mm-pagination-link">{{ $data->lastPage() }}</a>
                         @endif
                     @endif
                 @endif
             </div>
             <div>
                 @if($data->currentPage() >= 4)
-                    <a href="">{{ 1 }}</a>
+                    <a href="javascript:void(0)" data-page="{{ 1 }}" class="mm-pagination-link"data-page="{{ 1 }}" class="mm-pagination-link">{{ 1 }}</a>
                     ...
                     @if($data->currentPage() == $data->lastPage())
-                        <a href="">{{ $data->currentPage() -1 }}</a>
+                        <a href="javascript:void(0)" data-page="{{ $data->currentPage() -1 }}" class="mm-pagination-link">{{ $data->currentPage() -1 }}</a>
                         {{ $data->currentPage() }}
 
                     @elseif($data->currentPage() == $data->lastPage() - 1)
-                        <a href="">{{ $data->lastPage() -2}}</a>
+                        <a href="javascript:void(0)" data-page="{{ $data->lastPage() -2}}" class="mm-pagination-link">{{ $data->lastPage() -2}}</a>
                         {{$data->currentPage()}}
-                        <a href="">{{ $data->lastPage() }}</a>
+                        <a href="javascript:void(0)" data-page="{{ $data->lastPage() }}" class="mm-pagination-link">{{ $data->lastPage() }}</a>
                     @elseif($data->currentPage() == $data->lastPage() - 2)
                         {{$data->currentPage()}}
-                        <a href="">{{ $data->currentPage() +1}}</a>
-                        <a href="">{{ $data->lastPage() }}</a>
+                        <a href="javascript:void(0)" data-page="{{ $data->currentPage() +1}}" class="mm-pagination-link">{{ $data->currentPage() +1}}</a>
+                        <a href="javascript:void(0)" data-page="{{ $data->lastPage() }}" class="mm-pagination-link">{{ $data->lastPage() }}</a>
                     @elseif($data->currentPage() <= $data->lastPage() - 3)
-                        <a href="">{{ $data->currentPage() -1}}</a>
+                        <a href="javascript:void(0)" data-page="{{ $data->currentPage() -1}}" class="mm-pagination-link">{{ $data->currentPage() -1}}</a>
                         {{$data->currentPage()}}
-                        <a href="">{{ $data->currentPage() +1}}</a>
+                        <a href="javascript:void(0)" data-page="{{ $data->currentPage() +1}}" class="mm-pagination-link">{{ $data->currentPage() +1}}</a>
                         ...
-                        <a href="">{{ $data->lastPage() }}</a>
+                        <a href="javascript:void(0)" data-page="{{ $data->lastPage() }}" class="mm-pagination-link">{{ $data->lastPage() }}</a>
                     @endif
                 @endif
             </div>

@@ -100,6 +100,7 @@
                 type:"POST",
                 beforeSend: function() {
                     $('#loader').removeClass('d-none')
+                    $('#table_data').addClass('d-none')
                 },
                 data:{
                     ...pd_data,
@@ -114,6 +115,7 @@
                 },
                 complete: function(){
                     $('#loader').addClass('d-none')
+                    $('#table_data').removeClass('d-none')
                 },
             });
         }
