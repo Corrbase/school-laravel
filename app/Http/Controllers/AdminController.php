@@ -12,39 +12,62 @@ use function GuzzleHttp\Promise\all;
 
 class AdminController extends Controller
 {
+
+    // testing
+
+    public function search_teacher(Request $request)
+    {
+
+        $teachers = Teacher::where(function ($query) {
+            $query->where('name', 'like', '%' . request()->term . '%');
+        })->get();
+
+        $result = [];
+        foreach ($teachers as $category) {
+
+            $data = [
+                'id' => $category->id,
+                'text' => $category->name,
+            ];
+            array_push($result, $data);
+
+        }
+
+        return $result;
+        }
+
+
     // views
 
     public function admin(Teacher $teacher){
 
-        return view('admin/index', );
+        return view('admin.index', );
     }
 
     public function teachers()
     {
 
-        return view('admin/chapter/teachers', [
+        return view('admin.teacher.teachers', [
 
                 'teacher' => Teacher::latest()->simplePaginate(10, ['*'], 'teacher' ),
-
+s
         ]);
     }
 
     public function students()
     {
-        return view('admin/chapter/students', [
-                'student' => Student::latest()->simplePaginate(10, ['*'], 'student' ),
-        ]);
+        return view('admin.students.students');
     }
 
     public function teacher(Teacher $teacher){
-        return view('admin/hidden/teacher', [
+        return view('admin.teacher.teacher', [
             'teacher' => $teacher,
         ]);
     }
 
     public function teacher_edit(Teacher $teacher)
     {
-        return view('admin/edit/teacher', [
+        return view('admin.edit.teacher', [
             'teacher' => $teacher,
         ]);
     }
@@ -52,33 +75,28 @@ class AdminController extends Controller
     public function teacher_students(Teacher $teacher)
     {
 
-        return view('admin/hidden/students', [
+        return view('admin.students.teacher_students', [
             'teacher' => $teacher
         ]);
     }
 
-    public function test()
-    {
-        return view('test.ajax');
-    }
 
-    public function request(Request $request)
+    public function students_r(Request $request)
     {
         if($request->ajax()) {
-            $search = $_POST['search'];
+            $filters = [
+                'search' => $request->get('search'),
+                'class_num' => $request->get('class_num')
+            ];
 
-            if (isset($_POST['page_num']))
-            {
-                $page_num =  $_POST['page_num'];
-            }
-
-                $data = Student::latest()->filter([$_POST['search']])->paginate($_POST['page_num']);
+//                dd(Student::latest()->filter($filters));
+                $data = Student::latest()->search([$_POST['search']])->class_teacher([$_POST['class_teacher']])->class_num([$_POST['class_num']])->paginate($_POST['page_num']);
 
             if ($data['item'] == null){
                 $_POST['page'] = $data->lastPage();
-                $data = Student::latest()->filter([$_POST['search']])->paginate($_POST['page_num']);
+                $data = Student::latest()->search([$_POST['search']])->class_teacher([$_POST['class_teacher']])->class_num([$_POST['class_num']])->paginate($_POST['page_num']);
             }
-                return view('test.pagination', ['data' => $data])->render();
+                return view('admin.students.pagination', ['data' => $data])->render();
         }
     }
 
@@ -113,5 +131,23 @@ class AdminController extends Controller
         $teacher->update($data);
 
         return back()->with('message', 'Listing deleted successfully');
+    }
+
+    public function studentDelete(Request $request)
+    {
+        $student = Student::find($request->get('student_id'));
+        if ($student) {
+            $student->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => "Successfully deleted.",
+            ]);
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => "Student doesn't exist!",
+            ]);
+        }
     }
 }

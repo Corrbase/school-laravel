@@ -20,20 +20,42 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'admin'])->middleware('auth');
-Route::get('/admin/students', [\App\Http\Controllers\AdminController::class, 'students'])->middleware('auth');
-
-Route::get('/admin/teachers', [\App\Http\Controllers\AdminController::class, 'teachers'])->middleware('auth');
-
-Route::get('/admin/teacher/students/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher_students'])->middleware('auth');
-Route::get('/admin/teacher/edit/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher_edit'])->middleware('auth');
-Route::get('/admin/teacher/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher'])->middleware('auth');
-
-Route::put('/admin/r/edit/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher_edit_r']);
 
 
-// for testing
+Route::group([
+    'as' => 'admin.',
+    'prefix' => '/admin',
+], function () {
 
-Route::get('/test', [\App\Http\Controllers\AdminController::class, 'test']);
-Route::post('/testr', [\App\Http\Controllers\AdminController::class, 'request'])->name('testr');
+    Route::get('', [\App\Http\Controllers\AdminController::class, 'admin'])->middleware('auth');
 
+    Route::group([
+        'as' => 'teacher.',
+        'prefix' => '/teacher'
+    ], function (){
+
+        Route::get('/', [\App\Http\Controllers\AdminController::class, 'teachers'])->middleware('auth');
+
+        Route::get('/edit/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher_edit'])->middleware('auth');
+        Route::get('/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher'])->middleware('auth');
+
+        Route::put('/request/edit/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher_edit_r']);
+
+    });
+
+    Route::group([
+        'as' => 'students.',
+        'prefix' => 'students'
+    ], function () {
+
+
+        Route::get('/', [\App\Http\Controllers\AdminController::class, 'students'])->name('index');
+        Route::get('/{teacher}', [\App\Http\Controllers\AdminController::class, 'teacher_students'])->middleware('auth');
+
+        Route::post('/request', [\App\Http\Controllers\AdminController::class, 'students_r'])->name('student_request');
+        Route::post('/request/search/teacher', [\App\Http\Controllers\AdminController::class, 'search_teacher'])->name('search');
+
+        Route::delete('/delete/', [\App\Http\Controllers\AdminController::class, 'studentDelete'])->name('delete');
+    });
+
+});

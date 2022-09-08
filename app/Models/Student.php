@@ -9,14 +9,28 @@ class Student extends Model
 {
     use HasFactory;
 
-    public function scopeFilter($query, array $filters){
+    public function scopeSearch($query, array $filters)
+    {
+
         $search = $filters[0];
-        if($filters[0] ?? false)
-        {
+        $query->where('name', 'like', '%' . $search . '%')->orWhere('sname', 'like', '%' . $search . '%')->orWhere('email', 'like', '%' . $search . '%')->orWhere('age', 'like', '%' . $search . '%');
 
-            $query->where('name', 'like', '%' . $search . '%')->orWhere('sname', 'like', '%' . $search . '%')->orWhere('email', 'like', '%' . $search . '%')->orWhere('age', 'like', '%' . $search . '%');
+    }
 
-        }
+    public function scopeClass_num($query, array $filters)
+    {
+
+        $class_age = $filters[0];
+        $query->where('class_age', 'like', '%' . $class_age . '%');
+
+    }
+
+    public function scopeClass_teacher($query, array $filters)
+    {
+
+        $class_age = $filters[0];
+        $query->where('teacher_id', 'like', '%' . $class_age . '%');
+
     }
 
     public function teacher()

@@ -29,7 +29,7 @@
                     </div>
 
                     <thead>
-                    <tr>a
+                    <tr>
                         <th scope="col">id</th>
                         <th scope="col">FirstName</th>
                         <th scope="col">LastName</th>

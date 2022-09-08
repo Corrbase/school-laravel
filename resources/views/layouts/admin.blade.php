@@ -14,12 +14,14 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('style')
 
@@ -94,16 +96,20 @@
 
 
     <script>
-        function paginate(pd_data){
+        function loader($number){
+
+        }
+
+        function paginate(mm_data){
             $.ajax({
-                url: "{{ route('testr') }}",
+                url: "{{ route('admin.students.student_request') }}",
                 type:"POST",
                 beforeSend: function() {
                     $('#loader').removeClass('d-none')
                     $('#table_data').addClass('d-none')
                 },
                 data:{
-                    ...pd_data,
+                    ...mm_data,
                     _token: "{{ csrf_token() }}"
                 },
                 success:function(data){

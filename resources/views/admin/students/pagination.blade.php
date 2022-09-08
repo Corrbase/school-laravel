@@ -21,7 +21,7 @@
         <th scope="col">email</th>
         <th scope="col">gender</th>
         <th scope="col">age</th>
-        <th scope="col">profile</th>
+        <th scope="col">delete</th>
         <th scope="col">students</th>
     </tr>
     </thead>
@@ -35,12 +35,12 @@
             <td>{{$item->gender}}</td>
             <td>{{$item->age}}</td>
             <td>
-                <a href="/admin/teacher/{{$item->id}}" class="link-danger">
-                    <i class="fa-solid fa-user"></i><span class="p-2">Profile</span>
+                <a href="javascript:void(0)" class="link-danger" id="delete" data-type="{{ $item->id }}">
+                    <i class="fa-solid fa-user"></i><span class="p-2">Delete</span>
                 </a>
             </td>
             <td>
-                <a href="/admin/teacher/students/{{$item->id}}" class="link-danger">
+                <a href="/admin/teacher/students/{{$item->teacher_id}}" class="link-danger">
                     <i class="fa-solid fa-user"></i><span class="p-2">Students</span>
                 </a>
             </td>
